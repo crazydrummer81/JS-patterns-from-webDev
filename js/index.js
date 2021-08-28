@@ -19,7 +19,8 @@ myCount1.increaseCount();
 myCount2.increaseCount();
 myCount2.increaseCount();
 
-singletonNode.textContent = `${myCount1.count} ${myCount2.count}`;
+singletonNode.dump(myCount1.count);
+singletonNode.dump(myCount2.count);
 
 const modal = new Modal('Title', 'Body');
 const modalTriggers = document.querySelectorAll('.img-thumbnail');
