@@ -7,8 +7,10 @@
 	<title>Document</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/stackoverflow-dark.min.css">
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script defer type="module" src="js/index.js"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 </head>
 <body>
 
@@ -18,7 +20,7 @@
 			<img src="/img/singleton.png" title="Singleton" class="img-thumbnail">
 		</div>
 		<p>Модальное окно на этой странице. выводящее изображения реализовано Синглтоном.</p>
-		<code></code>
+		<!-- <code></code> -->
 	</div>
 
 	<div id="factory-method" class="container">
@@ -30,7 +32,7 @@
 		<p>
 			Простая фабрика может состоять и 2 классов - конструктор (генерирует новый объект) и класс, вызывающий это создание с опр. парамнетрами. Классов-конструкторов может быть несколько.
 		</p>
-		<code></code>
+		<!-- <code></code> -->
 	</div>
 
 	<div id="abstract-factory" class="container">
@@ -40,7 +42,7 @@
 		</div>
 		<p>Паттерн создает интерфейс, группирующий другие фабрики, логически связанные друг с другом. Абстракция для фабрики или фабричного метода.</p>
 		<p>У подфабрик должен быть одинкавый интервейс создания объектов, чтобы ими можно было управлять из абстрактной фабрики.</p>
-		<code></code>
+		<!-- <code></code> -->
 	</div>
 
 	<div id="prototype" class="container">
@@ -50,8 +52,13 @@
 		</div>
 		<p>Порождающий паттерн. Позволяет копировать объекты, не вдаваясь в подробности их реализации.</p>
 		<p>В отличие от Фабрики, есть базовая реализация класса. Создаются клоны, которые можно изменить под выполнение определенных задач.</p>
-		<code></code>
+		<!-- <code></code> -->
 	</div>
 	
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			hljs.highlightAll();
+		});
+	</script>
 </body>
 </html>
