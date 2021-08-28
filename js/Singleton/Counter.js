@@ -1,7 +1,5 @@
 let instance;
 
-console.debug('Counter.js');
-
 export default class Counter {
 	constructor() {
 		if (!instance) instance = this;
@@ -18,3 +16,5 @@ export default class Counter {
 		return instance.count++;
 	}
 }
+
+console.debug('Counter.js');

@@ -33,9 +33,9 @@ export default class Modal {
 		document.body.insertAdjacentHTML('beforeend', template);
 		this._node = document.getElementById('img-modal');
 
-		this._titleNode = this._node.querySelector('.modal-title'); console.debug('_titleNode', this._titleNode);
-		this._bodyNode = this._node.querySelector('.modal-body'); console.debug('_bodyNode', this._bodyNode);
-		this._footerNode = this._node.querySelector('.modal-footer'); console.debug('_footerNode', this._footerNode);
+		this._titleNode = this._node.querySelector('.modal-title');
+		this._bodyNode = this._node.querySelector('.modal-body');
+		this._footerNode = this._node.querySelector('.modal-footer');
 		this._footerBtnCloseNode = this._node.querySelector('.btn[data-bs-dismiss="modal"]');
 
 		this.title = title || '';
@@ -66,8 +66,6 @@ export default class Modal {
 	}
 
 	set body(body) {
-		console.debug('_bodyNode', this._bodyNode);
-		console.debug('body', body);
 		this._bodyNode.innerHTML = '';
 		switch (typeof(body)) {
 			case 'object': this._bodyNode.insertAdjacentElement('afterbegin', body.cloneNode()); break;

@@ -8,3 +8,5 @@ export default class BmwFactory {
 		}
 	}
 }
+
+console.debug('BmwFactory.js');

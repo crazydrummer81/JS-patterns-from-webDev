@@ -1,7 +1,12 @@
+HTMLElement.prototype.dump = function(obj) {
+	this.insertAdjacentHTML('beforeend', `<pre>${JSON.stringify(obj, null, 3)}</pre>`);
+};
+
 import Counter from './Singleton/Counter.js';
 import Modal from './Singleton/Modal.js';
 import BmwFactory from './Factory/BmwFactory.js';
 import bmwProducer from './AbstractFactory/BmwAbstractFactory.js';
+import TeslaCar from './Prototype/TeslaCar.js';
 
 // Singleton begin
 const singletonNode = document.querySelector('#singleton code');
@@ -43,11 +48,11 @@ const factory = new BmwFactory();
 const x5 = factory.create('X5');
 const x6 = factory.create('X6');
 
-factoryMethodNode.insertAdjacentHTML('beforeend', `<p>${JSON.stringify(x5, null, 3)}</p>`);
-factoryMethodNode.insertAdjacentHTML('beforeend', `<p>${JSON.stringify(x6, null, 3)}</p>`);
+factoryMethodNode.dump(x5);
+factoryMethodNode.dump(x6);
 // Factory method end
 
-// Abstract factory
+// Abstract factory begin
 const abstractFactoryNode = document.querySelector('#abstract-factory code'); 
 
 // Initializing Abstract factory of sport cars
@@ -56,4 +61,31 @@ const produce = bmwProducer('sport');
 // Car producing (Factory)
 const myCar = new produce();
 
-abstractFactoryNode.insertAdjacentHTML('beforeend', `<p>${myCar.constructor} ${JSON.stringify(myCar, null, 3)}</p>`);
+abstractFactoryNode.dump(myCar);
+// Abstract factory end
+
+// Prototype begin
+const prototypeNode = document.querySelector('#prototype code'); 
+
+// Produce base auto
+const prototypeCar = new TeslaCar({
+	model: 'S',
+	price: 80000,
+	interior: 'black',
+	autopilot: false
+});
+
+// Cloning base auto
+const car1 = prototypeCar.produce();
+const car2 = prototypeCar.produce();
+const car3 = prototypeCar.produce();
+
+// Changes for patricular auto
+car1.interior = 'white';
+car1.autopilot = true;
+
+prototypeNode.dump(car1);
+prototypeNode.dump(car2);
+prototypeNode.dump(car3);
+
+// Prototype end

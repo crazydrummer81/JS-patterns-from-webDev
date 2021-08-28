@@ -23,3 +23,5 @@ class I3 {
 		return 'I3 is a family car!';
 	}
 };
+
+console.debug('BmwAbstractFactory.js');
