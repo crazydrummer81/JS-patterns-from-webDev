@@ -47,16 +47,22 @@ export default class Modal {
 		this._modal = new bootstrap.Modal(this._node);
 	}
 
-	addFooterButton(where = 'beforeend', text, btnClass = 'primary', dataset = { role: save }) {
+	addFooterButton(props = {}) {
+		const { where = 'afterbegin', text = 'Save', btnClass = 'primary', dataset = {} } = props;
 		const btn = document.createElement('button');
 		btn.classList = `btn btn-${btnClass}`;
 		btn.textContent = text || Save;
-		Object.keys(dataset).forEach((k, v) => btn.dataset['k'] = v);
-		this._footerNode.insertAdjasentElement(where, btn);
+		Object.keys(dataset).forEach(key => btn.dataset[key] = dataset[key]);
+		this._footerNode.insertAdjacentElement(where, btn);
 	}
 
 	set title(title) {
+		this._title = title;
 		this._titleNode.textContent = title;
+	}
+
+	get title() {
+		return this._title;
 	}
 
 	set body(body) {
@@ -70,9 +76,8 @@ export default class Modal {
 	}
 
 	set footerBtnCloseEnable(flag) {
-		flag
-			? this._footerBtnCloseNode.classList.remove('hidden')
-			: this._footerBtnCloseNode.classList.add('hidden');
+		const method = flag ? 'remove' : 'add';
+		this._footerBtnCloseNode.classList[method]('hidden');
 	}
 
 	set footerBtnCloseText(text) {

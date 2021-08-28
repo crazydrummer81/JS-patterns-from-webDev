@@ -1,6 +1,7 @@
 import Counter from './Singleton/Counter.js';
 import Modal from './Singleton/Modal.js';
 import BmwFactory from './Factory/BmwFactory.js';
+import bmwProducer from './AbstractFactory/BmwAbstractFactory.js';
 
 // Singleton begin
 const singletonNode = document.querySelector('#singleton code');
@@ -25,9 +26,9 @@ modalTriggers.forEach(item => {
 		modal.title = img.title;
 		modal.body = img;
 		modal.show();
-		// Singletos test
+		// Singleton test
 		// const testModal = new Modal();
-		// setTimeout(() => {testModal.title = 'ASKDAKSJDkaj'}, 1000);
+		// setTimeout(() => {testModal.addFooterButton({dataset: {role: 'save'}})}, 1000);
 		// setTimeout(() => {modal.footerBtnCloseText = 'Закрыть'}, 2000);
 		// setTimeout(() => {testModal.footerBtnCloseEnable = false}, 3000);
 		// setTimeout(() => {modal.footerBtnCloseEnable = true}, 4000);
@@ -44,6 +45,15 @@ const x6 = factory.create('X6');
 
 factoryMethodNode.insertAdjacentHTML('beforeend', `<p>${JSON.stringify(x5, null, 3)}</p>`);
 factoryMethodNode.insertAdjacentHTML('beforeend', `<p>${JSON.stringify(x6, null, 3)}</p>`);
-
-
 // Factory method end
+
+// Abstract factory
+const abstractFactoryNode = document.querySelector('#abstract-factory code'); 
+
+// Initializing Abstract factory of sport cars
+const produce = bmwProducer('sport');
+
+// Car producing (Factory)
+const myCar = new produce();
+
+abstractFactoryNode.insertAdjacentHTML('beforeend', `<p>${myCar.constructor} ${JSON.stringify(myCar, null, 3)}</p>`);
