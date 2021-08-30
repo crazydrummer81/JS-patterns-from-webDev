@@ -15,6 +15,7 @@
 </head>
 
 <body>
+	<ul class="list-group overflow-auto contents" id="contents"></ul>
 
 	<div id="singleton" class="container">
 		<h2>Singleton</h2>
@@ -75,6 +76,13 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
 			hljs.highlightAll();
+
+			const contentsNode = document.getElementById('contents');
+			const h2s = document.querySelectorAll('h2');
+			h2s.forEach(h2 => {
+				const id = h2.parentElement.id;
+				contentsNode.insertAdjacentHTML('beforeend', `<li class="list-group-item"><a href="#${id}">${h2.innerText}</a></li>`);
+			});
 		});
 	</script>
 </body>
