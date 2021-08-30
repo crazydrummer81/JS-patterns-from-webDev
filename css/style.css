@@ -10,6 +10,10 @@ h2::before {
 	content: counter(paragraph) ". ";
 }
 
+pre {
+	tab-size: 3;
+}
+
 .img-wrapper {
 	max-width: 200px;
 	max-height: 200px;

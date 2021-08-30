@@ -15,7 +15,7 @@ const template = /*html*/`
 	</div>
 `;
 
-export default class Modal {
+export default class BSModal {
 	constructor(props = {}) {
 		const {title, body, settings = {}} = props;
 		const {footerBtnCloseEnable, footerBtnCloseText} = settings;

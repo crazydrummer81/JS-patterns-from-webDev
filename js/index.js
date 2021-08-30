@@ -1,15 +1,22 @@
+import Counter from './Modules/Singleton/Counter.js';
+import BSModal from './Components/BSModal.js';
+import BSAccordion from './Components/BSAccordion/BSAccordion.js';
+import BSAccordionDataItem from './Components/BSAccordion/BSAccordionDataItem.js';
+import BmwFactory from './Modules/Factory/BmwFactory.js';
+import bmwProducer from './Modules/AbstractFactory/BmwAbstractFactory.js';
+import TeslaCar from './Modules/Prototype/TeslaCar.js';
+import CarBuilder from "./Modules/Builder/CarBuilder.js";
+import Car from "./Modules/Builder/Car.js";
+import { dump } from './Modules/functions.js';
+
 HTMLElement.prototype.dump = function(obj, heading = '') {
-	const text = typeof(obj) === 'function' ? obj.toString() : JSON.stringify(obj, null, 3);
-	const headingHtml = heading ? heading + '\n' : '';
-	this.insertAdjacentHTML('beforeend', `<pre><code class="language-javascript">${headingHtml}${text}</code></pre>`);
+	this.insertAdjacentHTML('beforeend', dump(obj, heading));
 };
 
-import Counter from './Singleton/Counter.js';
-import Modal from './Singleton/Modal.js';
-import BmwFactory from './Factory/BmwFactory.js';
-import bmwProducer from './AbstractFactory/BmwAbstractFactory.js';
-import TeslaCar from './Prototype/TeslaCar.js';
-import CarBuilder from "./Builder/CarBuilder.js";
+HTMLElement.prototype.insertSpace = function(space = '1rem') {
+	this.insertAdjacentHTML('beforeend', `<div style="height: ${space}"></div>`);
+};
+
 
 // Singleton begin -----------------------------------------------------------
 const singletonNode = document.querySelector('#singleton');
@@ -24,7 +31,7 @@ myCount2.increaseCount();
 singletonNode.dump(myCount1.count);
 singletonNode.dump(myCount2.count);
 
-const modal = new Modal('Title', 'Body');
+const modal = new BSModal('Title', 'Body');
 const modalTriggers = document.querySelectorAll('.img-thumbnail');
 modalTriggers.forEach(item => {
 	item.addEventListener('click', (e) => {
@@ -95,6 +102,15 @@ prototypeNode.dump(car3);
 
 // Builder begin -----------------------------------------------------------
 const builderNode = document.querySelector('#builder'); 
+
+const builderAccordionItems = [
+	new BSAccordionDataItem('Car', dump(Car)),
+	new BSAccordionDataItem('CarBuilder', dump(CarBuilder)),
+];
+
+const builderAccordion = new BSAccordion(builderAccordionItems, { collapseOthers: false });
+builderNode.appendChild(builderAccordion.node);
+builderNode.insertSpace();
 
 const myCarBase = new CarBuilder().build();  // Создает базовую модель. Далее методы по цепочке добавляют опции.
 builderNode.dump(myCarBase, 'myCarBase');
