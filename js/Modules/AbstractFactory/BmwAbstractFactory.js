@@ -1,5 +1,5 @@
 // Abstract Factory
-export default function bmwProducer(kind) {
+function bmwProducer(kind) {
 	return kind === 'sport' ? sportCarFactory : familyCarFactory;
 };
 
@@ -23,3 +23,5 @@ class I3 {
 		return 'I3 is a family car!';
 	}
 };
+
+export default {bmwProducer, sportCarFactory, familyCarFactory, Z4, I3};

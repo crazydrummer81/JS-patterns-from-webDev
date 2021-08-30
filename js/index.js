@@ -3,7 +3,8 @@ import BSModal from './Components/BSModal.js';
 import BSAccordion from './Components/BSAccordion/BSAccordion.js';
 import BSAccordionDataItem from './Components/BSAccordion/BSAccordionDataItem.js';
 import BmwFactory from './Modules/Factory/BmwFactory.js';
-import bmwProducer from './Modules/AbstractFactory/BmwAbstractFactory.js';
+import Bmw from './Modules/Factory/Bmw.js';
+import * as BmwAbstractFactory from './Modules/AbstractFactory/BmwAbstractFactory.js';
 import TeslaCar from './Modules/Prototype/TeslaCar.js';
 import CarBuilder from "./Modules/Builder/CarBuilder.js";
 import Car from "./Modules/Builder/Car.js";
@@ -20,16 +21,30 @@ HTMLElement.prototype.insertSpace = function(space = '1rem') {
 
 // Singleton begin -----------------------------------------------------------
 const singletonNode = document.querySelector('#singleton');
-const myCount1 = new Counter();
-const myCount2 = new Counter();
 
-myCount1.increaseCount();
-myCount1.increaseCount();
-myCount2.increaseCount();
-myCount2.increaseCount();
+const singletonAccordionItems = [
+	new BSAccordionDataItem('demo', dump(singletonDemo)),
+	new BSAccordionDataItem('Counter', dump(Counter)),
+];
 
-singletonNode.dump(myCount1.count);
-singletonNode.dump(myCount2.count);
+const singletonAccordion = new BSAccordion(singletonAccordionItems, { collapseOthers: false });
+singletonNode.appendChild(singletonAccordion.node);
+singletonNode.insertSpace();
+
+singletonDemo();
+function singletonDemo() {
+	const myCount1 = new Counter();
+	const myCount2 = new Counter();
+	
+	myCount1.increaseCount();
+	myCount1.increaseCount();
+	myCount2.increaseCount();
+	myCount2.increaseCount();
+
+	singletonNode.dump(myCount1.count);
+	singletonNode.dump(myCount2.count);
+};
+
 
 const modal = new BSModal('Title', 'Body');
 const modalTriggers = document.querySelectorAll('.img-thumbnail');
@@ -54,50 +69,95 @@ modalTriggers.forEach(item => {
 
 // Factory method begin -----------------------------------------------------------
 const factoryMethodNode = document.querySelector('#factory-method');  
-const factory = new BmwFactory();
 
-const x5 = factory.create('X5');
-const x6 = factory.create('X6');
+const factoryMethodAccordionItems = [
+	new BSAccordionDataItem('demo', dump(factoryMethodDemo)),
+	new BSAccordionDataItem('Bmw', dump(Bmw)),
+	new BSAccordionDataItem('BmwFactory', dump(BmwFactory)),
+];
 
-factoryMethodNode.dump(x5);
-factoryMethodNode.dump(x6);
+const factoryMethodAccordion = new BSAccordion(factoryMethodAccordionItems, { collapseOthers: false });
+factoryMethodNode.appendChild(factoryMethodAccordion.node);
+factoryMethodNode.insertSpace();
+
+factoryMethodDemo();
+function factoryMethodDemo() {
+	const factory = new BmwFactory();
+	
+	const x5 = factory.create('X5');
+	const x6 = factory.create('X6');
+	factoryMethodNode.dump(x5);
+	factoryMethodNode.dump(x6);
+};
+
 // Factory method end ---------------------------------------------------------------
 
 // Abstract factory begin -----------------------------------------------------------
 const abstractFactoryNode = document.querySelector('#abstract-factory'); 
 
-// Initializing Abstract factory of sport cars
-const produce = bmwProducer('sport');
+const {bmwProducer} = BmwAbstractFactory.default;
 
-// Car producing (Factory)
-const myCar = new produce();
+const abstractFactoryAccordionItems = [
+	new BSAccordionDataItem('demo', dump(abstractFactoryDemo)),
+];
 
-abstractFactoryNode.dump(myCar.constructor);
+Object.keys(BmwAbstractFactory.default).forEach(key => {
+	abstractFactoryAccordionItems.push(new BSAccordionDataItem(key, dump(BmwAbstractFactory.default[key])));
+});
+
+const abstractFactoryAccordion = new BSAccordion(abstractFactoryAccordionItems, { collapseOthers: false });
+abstractFactoryNode.appendChild(abstractFactoryAccordion.node);
+abstractFactoryNode.insertSpace();
+
+abstractFactoryDemo();
+function abstractFactoryDemo() {
+	// Initializing Abstract factory of sport cars
+	const produce = bmwProducer('sport');
+	
+	// Car producing (Factory)
+	const myCar = new produce();
+	
+	abstractFactoryNode.dump(myCar.constructor);
+}
+
 // Abstract factory end ---------------------------------------------------------------
 
 // Prototype begin -----------------------------------------------------------
 const prototypeNode = document.querySelector('#prototype'); 
 
-// Produce base auto
-const prototypeCar = new TeslaCar({
-	model: 'S',
-	price: 80000,
-	interior: 'black',
-	autopilot: false
-});
+const prototypeAccordionItems = [
+	new BSAccordionDataItem('demo', dump(prototypeDemo)),
+	new BSAccordionDataItem('TeslaCar', dump(TeslaCar)),
+];
 
-// Cloning base auto
-const car1 = prototypeCar.produce();
-const car2 = prototypeCar.produce();
-const car3 = prototypeCar.produce();
+const prototypeAccordion = new BSAccordion(prototypeAccordionItems, { collapseOthers: false });
+prototypeNode.appendChild(prototypeAccordion.node);
+prototypeNode.insertSpace();
 
-// Changes for patricular auto
-car1.interior = 'white';
-car1.autopilot = true;
+prototypeDemo();
+function prototypeDemo() {
+	// Produce base auto
+	const prototypeCar = new TeslaCar({
+		model: 'S',
+		price: 80000,
+		interior: 'black',
+		autopilot: false
+	});
+	
+	// Cloning base auto
+	const car1 = prototypeCar.produce();
+	const car2 = prototypeCar.produce();
+	const car3 = prototypeCar.produce();
+	
+	// Changes for patricular auto
+	car1.interior = 'white';
+	car1.autopilot = true;
+	
+	prototypeNode.dump(car1);
+	prototypeNode.dump(car2);
+	prototypeNode.dump(car3);
+}
 
-prototypeNode.dump(car1);
-prototypeNode.dump(car2);
-prototypeNode.dump(car3);
 // Prototype end ---------------------------------------------------------------
 
 // Builder begin -----------------------------------------------------------
