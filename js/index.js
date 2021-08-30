@@ -1,6 +1,6 @@
 HTMLElement.prototype.dump = function(obj, heading = '') {
 	const text = typeof(obj) === 'function' ? obj.toString() : JSON.stringify(obj, null, 3);
-	const headingHtml = heading ? heading + ' ' : '';
+	const headingHtml = heading ? heading + '\n' : '';
 	this.insertAdjacentHTML('beforeend', `<pre><code class="language-javascript">${headingHtml}${text}</code></pre>`);
 };
 
@@ -113,3 +113,5 @@ const myCar2 = new CarBuilder()
 					.build();
 
 builderNode.dump(myCar2, 'myCar2');
+// Builder end -----------------------------------------------------------
+
