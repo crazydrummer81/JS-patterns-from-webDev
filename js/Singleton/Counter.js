@@ -16,5 +16,3 @@ export default class Counter {
 		return instance.count++;
 	}
 }
-
-console.debug('Counter.js');

@@ -5,5 +5,3 @@ export default class Bmw {
 		this.maxSpeed = maxSpeed;
 	}
 }
-
-console.debug('Bmw.js');

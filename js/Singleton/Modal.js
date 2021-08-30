@@ -94,4 +94,3 @@ const style = /*css*/`
 `;
 
 document.head.insertAdjacentHTML('beforeend', `<style>${style}</style>`);
-console.debug('Modal.js');

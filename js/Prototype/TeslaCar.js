@@ -15,5 +15,3 @@ export default class TeslaCar {
 		})
 	}
 }
-
-console.debug('TeslaCar.js'); 
