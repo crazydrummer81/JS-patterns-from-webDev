@@ -64,7 +64,6 @@ const produce = bmwProducer('sport');
 const myCar = new produce();
 
 abstractFactoryNode.dump(myCar.constructor);
-console.dir(myCar);
 // Abstract factory end
 
 // Prototype begin
