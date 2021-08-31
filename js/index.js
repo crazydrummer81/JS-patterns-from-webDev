@@ -9,14 +9,9 @@ import TeslaCar from './Modules/Prototype/TeslaCar.js';
 import CarBuilder from "./Modules/Builder/CarBuilder.js";
 import Car from "./Modules/Builder/Car.js";
 import { dump } from './Modules/functions.js';
+import HTMLElementExtenders from './Modules/HTMLElementExtenders.js';
 
-HTMLElement.prototype.dump = function(obj, heading = '') {
-	this.insertAdjacentHTML('beforeend', dump(obj, heading));
-};
-
-HTMLElement.prototype.insertSpace = function(space = '1rem') {
-	this.insertAdjacentHTML('beforeend', `<div style="height: ${space}"></div>`);
-};
+HTMLElementExtenders.addAll();
 
 
 // Singleton begin -----------------------------------------------------------
@@ -164,6 +159,7 @@ function prototypeDemo() {
 const builderNode = document.querySelector('#builder'); 
 
 const builderAccordionItems = [
+	new BSAccordionDataItem('builderDemo', dump(builderDemo)),
 	new BSAccordionDataItem('Car', dump(Car)),
 	new BSAccordionDataItem('CarBuilder', dump(CarBuilder)),
 ];
@@ -172,22 +168,47 @@ const builderAccordion = new BSAccordion(builderAccordionItems, { collapseOthers
 builderNode.appendChild(builderAccordion.node);
 builderNode.insertSpace();
 
-const myCarBase = new CarBuilder().build();  // Создает базовую модель. Далее методы по цепочке добавляют опции.
-builderNode.dump(myCarBase, 'myCarBase');
+builderDemo(builderNode);
+function builderDemo(builderNode) {
+	const myCarBase = new CarBuilder().build();  // Создает базовую модель. Далее методы по цепочке добавляют опции.
+	builderNode.dump(myCarBase, 'myCarBase');
 
-const myCar1 = new CarBuilder()
-					.addAutopilot(true)
-					.addSignaling(true)
-					.updateEngine('V8')
-					.build();
-
-builderNode.dump(myCar1, 'myCar1');
-
-const myCar2 = new CarBuilder()
-					.addSignaling(true)
-					.updateEngine('V12')
-					.build();
-
-builderNode.dump(myCar2, 'myCar2');
+	const myCar1 = new CarBuilder()
+						.addAutopilot(true)
+						.addSignaling(true)
+						.updateEngine('V8')
+						.build();
+	
+	builderNode.dump(myCar1, 'myCar1');
+	
+	const myCar2 = new CarBuilder()
+						.addSignaling(true)
+						.updateEngine('V12')
+						.build();
+	
+	builderNode.dump(myCar2, 'myCar2');
+};
 // Builder end -----------------------------------------------------------
 
+// Decorator begin -------------------------------------------------------
+const decoratorNode = document.querySelector('#decorator');
+
+import { decoratorDemo } from './Modules/Decorator/index.js';
+import Motorbike from './Modules/Decorator/Motorbike.js';
+import Yamaha from './Modules/Decorator/Yamaha.js';
+import { HandsRpotection, HandlebarsHeating } from './Modules/Decorator/Decorators.js';
+
+const decoratorAccordionItems = [
+	new BSAccordionDataItem('Motorbike', dump(Motorbike)),
+	new BSAccordionDataItem('Yamaha', dump(Yamaha)),
+	new BSAccordionDataItem('HandsRpotection', dump(HandsRpotection)),
+	new BSAccordionDataItem('HandlebarsHeating', dump(HandlebarsHeating)),
+	new BSAccordionDataItem('decoratorDemo', dump(decoratorDemo)),
+];
+
+const decoratorAccordion = new BSAccordion(decoratorAccordionItems, { collapseOthers: false });
+decoratorNode.appendChild(decoratorAccordion.node);
+decoratorNode.insertSpace();
+
+decoratorDemo(decoratorNode);
+// Decorator end -------------------------------------------------------
