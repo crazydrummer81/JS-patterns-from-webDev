@@ -1,4 +1,4 @@
-export class HandsRpotection {
+export class HandsProtection {
 	constructor(motorbike) {
 		this.motorbike = motorbike;
 	}
@@ -26,4 +26,4 @@ export class HandlebarsHeating {
 	}
 }
 
-export default { HandsRpotection, HandlebarsHeating };
+export default { HandsRpotection: HandsProtection, HandlebarsHeating };

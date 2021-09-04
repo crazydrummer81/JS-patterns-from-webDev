@@ -19,7 +19,12 @@ export function convertAnyToHtml(param) {
 }
 
 export function dump(obj, heading = '') {
-	const text = typeof(obj) === 'function' ? obj.toString() : JSON.stringify(obj, null, 3);
+	let text = '';
+	switch (typeof(obj)) {
+		case 'function': text = obj.toString(); break;
+		case 'object': text = JSON.stringify(obj, null, 3); break;
+		case 'string': text = `"${obj}"`; break;
+	}
 	const headingHtml = heading ? heading + '\n' : '';
 	return `<pre><code class="language-javascript">${headingHtml}${text}</code></pre>`;
 };

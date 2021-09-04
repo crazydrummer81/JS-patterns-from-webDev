@@ -1,13 +1,13 @@
 import Yamaha from "./Yamaha.js";
-import { HandsRpotection, HandlebarsHeating } from './Decorators.js';
+import { HandsProtection as HandsProtection, HandlebarsHeating } from './Decorators.js';
 import Motorbike from "./Motorbike.js";
 import HTMLElementExtenders from '/js/Modules/HTMLElementExtenders.js';
 
 HTMLElementExtenders.addAll();
 
-export function decoratorDemo(node) {
+export default function decoratorDemo(node) {
 	let yamaha = new Yamaha();
-	yamaha = new HandsRpotection(yamaha);
+	yamaha = new HandsProtection(yamaha);
 	yamaha = new HandlebarsHeating(yamaha);
 
 	node.dump(yamaha.getPrice(), `yamaha.getPrice()`);
@@ -23,10 +23,8 @@ export function decoratorDemo(node) {
 	}
 
 	let kawasaki = new Kawasaki();
-	kawasaki = new HandsRpotection(kawasaki);
+	kawasaki = new HandsProtection(kawasaki);
 
 	node.dump(kawasaki.getPrice(), `kawasaki.getPrice()`);
 	node.dump(kawasaki.getDescription(), `kawasaki.getDescription()`);
 }
-
-export default { decoratorDemo };

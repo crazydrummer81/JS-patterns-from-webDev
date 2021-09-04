@@ -170,7 +170,7 @@ builderNode.insertSpace();
 
 builderDemo(builderNode);
 function builderDemo(builderNode) {
-	const myCarBase = new CarBuilder().build();  // Создает базовую модель. Далее методы по цепочке добавляют опции.
+	const myCarBase = new CarBuilder().build();  // Cоздает базовую модель. Далее методы по цепочке добавляют опции.
 	builderNode.dump(myCarBase, 'myCarBase');
 
 	const myCar1 = new CarBuilder()
@@ -193,15 +193,15 @@ function builderDemo(builderNode) {
 // Decorator begin -------------------------------------------------------
 const decoratorNode = document.querySelector('#decorator');
 
-import { decoratorDemo } from './Modules/Decorator/index.js';
+import decoratorDemo from './Modules/Decorator/index.js';
 import Motorbike from './Modules/Decorator/Motorbike.js';
 import Yamaha from './Modules/Decorator/Yamaha.js';
-import { HandsRpotection, HandlebarsHeating } from './Modules/Decorator/Decorators.js';
+import { HandsProtection, HandlebarsHeating } from './Modules/Decorator/Decorators.js';
 
 const decoratorAccordionItems = [
 	new BSAccordionDataItem('Motorbike', dump(Motorbike)),
 	new BSAccordionDataItem('Yamaha', dump(Yamaha)),
-	new BSAccordionDataItem('HandsRpotection', dump(HandsRpotection)),
+	new BSAccordionDataItem('HandsRpotection', dump(HandsProtection)),
 	new BSAccordionDataItem('HandlebarsHeating', dump(HandlebarsHeating)),
 	new BSAccordionDataItem('decoratorDemo', dump(decoratorDemo)),
 ];
@@ -212,3 +212,25 @@ decoratorNode.insertSpace();
 
 decoratorDemo(decoratorNode);
 // Decorator end -------------------------------------------------------
+
+// Facade begin --------------------------------------------------------
+const facadeNode = document.querySelector('#facade');
+
+import facadeDemo from './Modules/Facade/index.js';
+import Conveyor from './Modules/Facade/Conveyor.js';
+import ConveyorFacade from './Modules/Facade/ConveyorFacade.js';
+
+
+const facadeAccordionItems = [
+	new BSAccordionDataItem('Conveyor', dump(Conveyor)),
+	new BSAccordionDataItem('ConveyorFacade', dump(ConveyorFacade)),
+	new BSAccordionDataItem('facadeDemo', dump(facadeDemo)),
+];
+
+const facadeAccordion = new BSAccordion(facadeAccordionItems, { collapseOthers: false });
+facadeNode.appendChild(facadeAccordion.node);
+facadeNode.insertSpace();
+
+facadeDemo(facadeNode);
+
+// Facade end ----------------------------------------------------------
