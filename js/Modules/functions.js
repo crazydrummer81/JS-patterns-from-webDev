@@ -21,6 +21,7 @@ export function convertAnyToHtml(param) {
 export function dump(obj, heading = '') {
 	let text = '';
 	switch (typeof(obj)) {
+		case 'number':
 		case 'function': text = obj.toString(); break;
 		case 'object': text = JSON.stringify(obj, null, 3); break;
 		case 'string': text = `"${obj}"`; break;
