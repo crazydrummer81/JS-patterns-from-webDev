@@ -232,5 +232,25 @@ facadeNode.appendChild(facadeAccordion.node);
 facadeNode.insertSpace();
 
 facadeDemo(facadeNode);
-
 // Facade end ----------------------------------------------------------
+
+// Proxy begin --------------------------------------------------------
+const proxyNode = document.querySelector('#proxy');
+
+import proxyDemo from './Modules/Proxy/index.js';
+import CarAccess from './Modules/Proxy/CarAccess.js';
+import SecuritySystem from './Modules/Proxy/SecuritySystem.js';
+
+
+const proxyAccordionItems = [
+	new BSAccordionDataItem('Conveyor', dump(CarAccess)),
+	new BSAccordionDataItem('ConveyorProxy', dump(SecuritySystem)),
+	new BSAccordionDataItem('proxyDemo', dump(proxyDemo)),
+];
+
+const proxyAccordion = new BSAccordion(proxyAccordionItems, { collapseOthers: false });
+proxyNode.appendChild(proxyAccordion.node);
+proxyNode.insertSpace();
+
+proxyDemo(proxyNode);
+// Proxy end ----------------------------------------------------------
