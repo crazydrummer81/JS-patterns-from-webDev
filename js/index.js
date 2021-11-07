@@ -14,7 +14,7 @@ import HTMLElementExtenders from './Modules/HTMLElementExtenders.js';
 HTMLElementExtenders.addAll();
 
 
-// Singleton begin -----------------------------------------------------------
+// Singleton -----------------------------------------------------------
 const singletonNode = document.querySelector('#singleton');
 
 const singletonAccordionItems = [
@@ -62,7 +62,7 @@ modalTriggers.forEach(item => {
 });
 // Singleton end ---------------------------------------------------------------
 
-// Factory method begin -----------------------------------------------------------
+// Factory method -----------------------------------------------------------
 const factoryMethodNode = document.querySelector('#factory-method');  
 
 const factoryMethodAccordionItems = [
@@ -87,7 +87,7 @@ function factoryMethodDemo() {
 
 // Factory method end ---------------------------------------------------------------
 
-// Abstract factory begin -----------------------------------------------------------
+// Abstract factory -----------------------------------------------------------
 const abstractFactoryNode = document.querySelector('#abstract-factory'); 
 
 const {bmwProducer} = BmwAbstractFactory.default;
@@ -117,7 +117,7 @@ function abstractFactoryDemo() {
 
 // Abstract factory end ---------------------------------------------------------------
 
-// Prototype begin -----------------------------------------------------------
+// Prototype -----------------------------------------------------------
 const prototypeNode = document.querySelector('#prototype'); 
 
 const prototypeAccordionItems = [
@@ -155,7 +155,7 @@ function prototypeDemo() {
 
 // Prototype end ---------------------------------------------------------------
 
-// Builder begin -----------------------------------------------------------
+// Builder -----------------------------------------------------------
 const builderNode = document.querySelector('#builder'); 
 
 const builderAccordionItems = [
@@ -190,7 +190,7 @@ function builderDemo(builderNode) {
 };
 // Builder end -----------------------------------------------------------
 
-// Decorator begin -------------------------------------------------------
+// Decorator -------------------------------------------------------
 const decoratorNode = document.querySelector('#decorator');
 
 import decoratorDemo from './Modules/Decorator/index.js';
@@ -213,7 +213,7 @@ decoratorNode.insertSpace();
 decoratorDemo(decoratorNode);
 // Decorator end -------------------------------------------------------
 
-// Facade begin --------------------------------------------------------
+// Facade --------------------------------------------------------
 const facadeNode = document.querySelector('#facade');
 
 import facadeDemo from './Modules/Facade/index.js';
@@ -234,7 +234,7 @@ facadeNode.insertSpace();
 facadeDemo(facadeNode);
 // Facade end ----------------------------------------------------------
 
-// Proxy begin --------------------------------------------------------
+// Proxy --------------------------------------------------------
 const proxyNode = document.querySelector('#proxy');
 
 import proxyDemo from './Modules/Proxy/index.js';
@@ -254,3 +254,24 @@ proxyNode.insertSpace();
 
 proxyDemo(proxyNode);
 // Proxy end ----------------------------------------------------------
+
+// Adapter --------------------------------------------------------
+const adapterNode = document.querySelector('#adapter');
+
+import adapterDemo from './Modules/Adapter/index.js';
+import { Engine2, EngineV8, Auto, EngineV8Adapter } from './Modules/Adapter/Adapter.js';
+
+const adapterAccordionItems = [
+	new BSAccordionDataItem('Engine2', dump(Engine2)),
+	new BSAccordionDataItem('EngineV8', dump(EngineV8)),
+	new BSAccordionDataItem('Auto', dump(Auto)),
+	new BSAccordionDataItem('EngineV8Adapter', dump(EngineV8Adapter)),
+	new BSAccordionDataItem('adapterDemo', dump(adapterDemo)),
+];
+
+const adapterAccordion = new BSAccordion(adapterAccordionItems, { collapseOthers: false });
+adapterNode.appendChild(adapterAccordion.node);
+adapterNode.insertSpace();
+
+adapterDemo(adapterNode);
+// Adapter end ----------------------------------------------------------
